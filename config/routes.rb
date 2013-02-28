@@ -1,5 +1,7 @@
 RecruitYes::Application.routes.draw do
   match '/about', to: 'static_pages#about'
+
+  match '/signup', to: 'Users#new'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
