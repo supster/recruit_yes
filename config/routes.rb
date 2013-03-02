@@ -1,4 +1,7 @@
 RecruitYes::Application.routes.draw do
+  resources :users
+  
+  root :to => 'statistic_pages#about'
   match '/about', to: 'static_pages#about'
 
   match '/signup', to: 'Users#new'
