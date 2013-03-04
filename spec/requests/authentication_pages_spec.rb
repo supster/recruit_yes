@@ -19,4 +19,18 @@ describe "Authentication" do
         before { click_button "Sign in" }
       end
   end
+  
+  describe "autherization" do
+      describe "for non-signed-in users" do
+        
+        describe "visiting the edit page" do
+          before {visit edit_user_path(user)}
+          it { should have_selector("Sign In") }
+        end
+        
+        
+      end
+      
+    
+  end
 end

@@ -52,6 +52,8 @@ describe "User Pages" do
         it { should have_link('Sign out') }
       end
 =end
-    end 
+    end
+    
+     
   end
 end
