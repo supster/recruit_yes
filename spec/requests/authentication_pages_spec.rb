@@ -23,10 +23,10 @@ describe "Authentication" do
   describe "autherization" do
       describe "for non-signed-in users" do
         
-        describe "visiting the edit page" do
-          before {visit edit_user_path(user)}
-          it { should have_selector("Sign In") }
-        end
+        #describe "visiting the edit page" do
+        #  before {visit edit_user_path(user)}
+        #  it { should have_selector("Sign In") }
+        #end
         
         
       end
