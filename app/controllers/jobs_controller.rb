@@ -37,8 +37,17 @@ class JobsController < ApplicationController
   
   API_KEY = 'kdi6s57l5zj9' #Your app's API key
   API_SECRET = 'gnwmrmh8MJeM724w' #Your app's API secret
-  REDIRECT_URI = 'http://localhost:3000/jobs/accept' #Redirect users after authentication to this path, ensure that you have set up your routes to handle the callbacks
+  #REDIRECT_URI = "http://#{@env['REQUEST_URL']}/jobs/accept" #Redirect users after authentication to this path, ensure that you have set up your routes to handle the callbacks
   STATE = SecureRandom.hex(15) #A unique long string that is not easy to guess
+  
+  def get_redirect_uri
+    if !request.port.nil? 
+      local_port = ':' + request.port.to_s()
+    else
+      local_port = ""
+    end
+    "http://#{request.host}#{local_port}/jobs/accept"
+  end
   
   #Instantiate your OAuth2 client object
   def client
@@ -55,7 +64,7 @@ class JobsController < ApplicationController
     #Redirect your user in order to authenticate
     redirect_to client.auth_code.authorize_url(:scope => 'r_fullprofile r_emailaddress r_network', 
                                                :state => STATE, 
-                                               :redirect_uri => REDIRECT_URI)
+                                               :redirect_uri => get_redirect_uri)
   end
  
   # This method will handle the callback once the user authorizes your application
@@ -63,15 +72,12 @@ class JobsController < ApplicationController
       #Fetch the 'code' query parameter from the callback
           code = params[:code] 
           state = params[:state]
-          
-          logger.debug " in accept "
            
           if !state.eql?(STATE)
              #Reject the request as it may be a result of CSRF
-             logger.debug "reject"
           else          
             #Get token object, passing in the authorization code from the previous step 
-            token = client.auth_code.get_token(code, :redirect_uri => REDIRECT_URI)
+            token = client.auth_code.get_token(code, :redirect_uri => get_redirect_uri)
            
             #Use token object to create access token for user 
             #(this is required so that you provide the correct param name for the access token)
@@ -85,7 +91,7 @@ class JobsController < ApplicationController
             response = access_token.get('https://www.linkedin.com/v1/people/~')
  
             #Print body of response to command line window
-            logger.debug "test putting string #{response.body}"
+            #logger.debug "test putting string #{response.body}"
  
             # Handle HTTP responses
             case response
