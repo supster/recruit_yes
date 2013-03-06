@@ -1,0 +1,11 @@
+<textarea rows="20">
+	<%=@query%>
+	<%=@xml_data.body%>
+</textarea>
+<ul class="users">
+	<%= @xml_doc.xpath("//person").each do |rec| %>
+		<li>
+			<%= link_to "#{rec.at('first-name').text} #{rec.at('last-name').text}", "http://www.linkedin.com/" %>		
+		</li>
+	<% end %>
+</ul>

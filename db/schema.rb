@@ -11,16 +11,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130305015808) do
+ActiveRecord::Schema.define(:version => 20130306005420) do
+
+  create_table "jobs", :force => true do |t|
+    t.string   "title"
+    t.integer  "miles"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.string   "industry"
+    t.string   "description"
+    t.float    "year_experience"
+    t.string   "min_education"
+    t.string   "desire_education"
+    t.float    "base_salary"
+    t.string   "open_mind"
+    t.string   "key_words"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "password_digest"
-    t.string   "remember_token"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
+    t.string   "password_digest"
+    t.string   "remember_token"
     t.boolean  "admin",           :default => false
   end
+
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
 end

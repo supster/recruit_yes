@@ -1,6 +1,7 @@
 RecruitYes::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :jobs
   
   root to: 'static_pages#home'
 
@@ -10,6 +11,7 @@ RecruitYes::Application.routes.draw do
   match '/signout',   to: 'sessions#destroy', via: :delete
 
   match '/about',     to: 'static_pages#about'
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
