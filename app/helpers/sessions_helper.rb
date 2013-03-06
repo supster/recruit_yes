@@ -25,6 +25,7 @@ module SessionsHelper
   def sign_out
     current_user = nil
     cookies.delete(:remember_token)
+    session.delete(:linkedin_token) 
   end
   
   def store_location

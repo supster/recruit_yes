@@ -41,8 +41,9 @@ class JobsController < ApplicationController
   STATE = SecureRandom.hex(15) #A unique long string that is not easy to guess
   
   def get_redirect_uri
-    if !request.port.nil? 
-      local_port = ':' + request.port.to_s()
+    if Rails.env.development? 
+      #local_port = ':' + request.port.to_s()
+      local_port = ":3000"
     else
       local_port = ""
     end
