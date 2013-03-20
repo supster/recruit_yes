@@ -1,11 +1,17 @@
-<textarea rows="20">
-	<%=@query%>
-	<%=@xml_data.body%>
-</textarea>
+<% provide(:title, 'Search Result')%>
+<h1>Search Result</h1>
 <ul class="users">
 	<%= @xml_doc.xpath("//person").each do |rec| %>
 		<li>
-			<%= link_to "#{rec.at('first-name').text} #{rec.at('last-name').text}", "http://www.linkedin.com/" %>		
+			<div class="media">
+				<div class="pull-left" style="padding-right: 5px">
+					<%= image_tag "#{rec.at('picture-url').text}", class: "img-polaroid" if !rec.at('picture-url').nil?%>
+				</div>
+				<div class="media-body">
+					<strong><%= link_to "#{rec.at('first-name').text} #{rec.at('last-name').text}", "#{rec.at('public-profile-url').text}", target: "_blank"  %></strong><br/>		
+					<%= "#{rec.at('headline').text}"%>
+				</div>
+			</div>
 		</li>
 	<% end %>
 </ul>

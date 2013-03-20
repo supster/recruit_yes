@@ -31,5 +31,15 @@ input, textarea, select, .uneditable-input {
 
 /* User Index*/
 .users {
-  
+  list-style: none;
+  margin: 0;
+  li {
+    vertical-align: top;
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
 }

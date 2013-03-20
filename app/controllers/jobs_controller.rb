@@ -23,7 +23,7 @@ class JobsController < ApplicationController
         :param_name => "oauth2_access_token",
     })
     
-    @query = URI.escape("https://api.linkedin.com/v1/people-search?keywords=#{params[:job][:key_words]}")
+    @query = URI.escape("https://api.linkedin.com/v1/people-search:(people:(id,first-name,last-name,picture-url,headline,public-profile-url),num-results)?keywords=#{params[:job][:key_words]}")
     @xml_data = access_token.get(@query)
     @xml_doc = Nokogiri::XML(@xml_data.body)
   end
