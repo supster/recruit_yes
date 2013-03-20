@@ -8,8 +8,8 @@
 					<%= image_tag "#{rec.at('picture-url').text}", class: "img-polaroid" if !rec.at('picture-url').nil?%>
 				</div>
 				<div class="media-body">
-					<strong><%= link_to "#{rec.at('first-name').text} #{rec.at('last-name').text}", "#{rec.at('public-profile-url').text}", target: "_blank"  %></strong><br/>		
-					<%= "#{rec.at('headline').text}"%>
+					<strong><%= link_to "#{show_text(rec.at('first-name'))} #{show_text(rec.at('last-name'))}", "#{show_text(rec.at('public-profile-url'))}", target: "_blank"  %></strong><br/>		
+					<%= "#{show_text(rec.at('headline'))}"%>
 				</div>
 			</div>
 		</li>

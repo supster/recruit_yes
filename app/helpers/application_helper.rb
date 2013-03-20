@@ -8,5 +8,14 @@ module ApplicationHelper
       "#{base_title} | #{page_title}"
     end      
   end
+  
+  def show_text(obj)
+    if obj.nil?
+      ""
+    else 
+      obj.text
+    end
+    
+  end
  
 end
